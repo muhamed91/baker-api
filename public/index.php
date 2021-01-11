@@ -9,13 +9,6 @@ $product = [
     ['productname' => 'UX/UI', 'description' => 'Lorem 25'],
 ];
 
-
-$app = new \Slim\App;
-$app->get('/product', function (Request $request, Response $response, array $args) use($product) {
-
-    return $response->withJson($product);
-});
-
 $app->add(function ($req, $res, $next) {
     $response = $next($req, $res);
     return $response
@@ -23,4 +16,13 @@ $app->add(function ($req, $res, $next) {
             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
 });
+
+
+$app = new \Slim\App;
+$app->get('/product', function (Request $request, Response $response, array $args) use($product) {
+
+    return $response->withJson($product);
+});
+
+
 $app->run();
